@@ -13,9 +13,12 @@ function onsubmit(evt) {
   let  searchQuery= evt.currentTarget.elements.searchQuery.value;
   
   getQuery(searchQuery);
+  lightbox.refresh(); 
 };
-    
+   
 var lightbox = new SimpleLightbox('.gallery a');
+
+
 
 
 async function getQuery(q) {
@@ -37,7 +40,7 @@ async function getQuery(q) {
   
   await axios.get(`https://pixabay.com/api/`, config )
     .then(resp => {
-      console.log(createMarkup(resp.data.hits))
+      console.log(resp.data.hits)
       list.insertAdjacentHTML('afterbegin', createMarkup(resp.data.hits))
     })
   .catch(err=>{console.error(err)})
@@ -51,7 +54,7 @@ function createMarkup(arr) {
     views,
     comments,
     downloads
-  }) => `<li class="gallery__item" style = "list-style-type: none">
+  }) => `<li class="gallery__item" >
             <a class="gallery__link" href="${largeImageURL}">
             <img class="gallery__image" src="${webformatURL}" alt="${tags}" title="${tags}"/>
             <div class="info">
