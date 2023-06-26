@@ -6,10 +6,11 @@ import Notiflix from 'notiflix';
 const form = document.querySelector('.search-form');
 const list = document.querySelector('.list');
 const guard = document.querySelector('.js-guard');
-let observer = new IntersectionObserver(onLoad, {rootMargin:"200px"});
+let observer = new IntersectionObserver(onLoad, {rootMargin:"500px"});
 let page = 1;
 let query;
-let pages_total=0;
+let pages_total = 0;
+let total_images;
 
 
 form.addEventListener('submit', onSubmit);
@@ -19,19 +20,19 @@ function onLoad(entries,observer) {
   entries.forEach((entry) => {
     if (entry.isIntersecting & page<pages_total) {
       page += 1;
+      observer.unobserve(guard);
       getQuery(query,page)
     } 
   })
-  
 }
 
 function onSubmit(evt) {
   evt.preventDefault();
   list.innerHTML = '';
-  // page = 1;
+  observer.unobserve(guard);
   query= evt.currentTarget.elements.searchQuery.value;
   getQuery(query)
- 
+  form.elements.searchQuery.value = '';
 };
  
 async function getQuery(q, currPage=1) {
@@ -53,22 +54,20 @@ async function getQuery(q, currPage=1) {
  
   await axios.get(`https://pixabay.com/api/`, config )
     .then(resp => {
+      total_images = resp.data.total;
+      if(page===1) Notiflix.Notify.success(`Hooray! We found ${total_images} images.`); 
       console.log(resp)
-      if (resp.data.total > 0) {
-      Notiflix.Notify.success(`Hooray! We found ${resp.data.total} images.`);  
+      if (resp.data.total > 0 & q!=='') {
       pages_total = Math.ceil(resp.data.total / per_page);
       console.log(pages_total)
       list.insertAdjacentHTML('beforeend', createMarkup(resp.data.hits))
       lightbox.refresh(); 
-        observer.observe(guard);
-         
+      observer.observe(guard);
       }
       else {
-        Notiflix.Notify.failure('"Sorry, there are no images matching your search query. Please try again."');
+        Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
       }
-     
     })
-    
   .catch(err=>console.log(err))
 }
 
