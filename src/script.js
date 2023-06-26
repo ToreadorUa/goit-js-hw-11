@@ -55,7 +55,7 @@ async function getQuery(q, currPage=1) {
   await axios.get(`https://pixabay.com/api/`, config )
     .then(resp => {
       total_images = resp.data.total;
-      if(page===1) Notiflix.Notify.success(`Hooray! We found ${total_images} images.`); 
+      if(page===1&q!=='') Notiflix.Notify.success(`Hooray! We found ${total_images} images.`); 
       console.log(resp)
       if (resp.data.total > 0 & q!=='') {
       pages_total = Math.ceil(resp.data.total / per_page);
