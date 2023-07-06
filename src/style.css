@@ -1,101 +1,132 @@
-body{
-    margin: 0;
+body {
+  margin: 0;
 }
-.info{
-    display: flex;
-    justify-content: space-around;
-    color: black;
-    font-size: 9px;
-    font-family: monospace;
+.info {
+  display: flex;
+  justify-content: space-around;
+  color: black;
+  font-size: 9px;
+  font-family: monospace;
 }
 h2 {
-    margin: unset;
-    display: grid;
+  margin: unset;
+  display: grid;
 }
 span {
-    font-size: 11px;
-    text-align: center  ;
+  font-size: 11px;
+  text-align: center;
 }
 :root {
-    --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    --animation-duration: 250ms;
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-duration: 250ms;
 }
 
 .list {
-    list-style-type: none;
-    padding: 40px 20px 0px 20px;
-    margin-top: 0;
-
+  list-style-type: none;
+  padding: 40px 20px 0px 20px;
+  margin-top: 0;
 }
 
 .gallery {
-    display: grid;
-    max-width: 1200px;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    grid-auto-rows: 240px;
-    grid-gap: 12px;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    
-        
+  display: grid;
+  max-width: 1200px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-auto-rows: 240px;
+  grid-gap: 12px;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .gallery__item {
-    position: relative;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
-        0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
-   
-} 
+  position: relative;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
 
 .gallery__item:hover {
-    transform: scale(1.03);
+  transform: scale(1.03);
 }
 
 .gallery__image {
-    height: 86%;
-    width: 100%;
-    object-fit: cover;
-    transition: transform var(--animation-duration) var(--timing-function);
+  height: 86%;
+  width: 100%;
+  object-fit: cover;
+  transition: transform var(--animation-duration) var(--timing-function);
 }
 
 .gallery__link {
-    display: block;
-    text-decoration: none;
-    height: 100%;
+  display: block;
+  text-decoration: none;
+  height: 100%;
 }
 
 .gallery__link:hover {
-    cursor: zoom-in;
+  cursor: zoom-in;
 }
-.search-form{
-    position: fixed;
-    z-index: 100;
-        width: 100%;
-            background: cadetblue;
-            height: 35px;
+.search-form {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  background: cadetblue;
+  height: 35px;
 }
-.search-form input{
-        border: none;
-        border-radius: 2px;
-            width: 80%;
-            margin-left: 70px;
-            margin-top: 6px;
-            background: cornsilk;
-            height: 20px;
-            font-size: 15px;
+.search-form input {
+  border: none;
+  border-radius: 2px;
+  width: 80%;
+  margin-left: 70px;
+  margin-top: 6px;
+  background: cornsilk;
+  height: 20px;
+  font-size: 15px;
 }
-.search-form input:focus{
-    outline: 1px solid;
+.search-form input:focus {
+  outline: 1px solid;
 }
 .search-form button {
-        left: 83%;
-            position: absolute;
-    padding: 8px;
-    background: transparent;
-    color: grey;
-    font-size: 17px;
-    border:none;
-        cursor: pointer;
+  left: 83%;
+  position: absolute;
+  padding: 8px;
+  background: transparent;
+  color: grey;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+.switch-btn {
+  display: inline-block;
+  width: 27px; /* ширина */
+  height: 18px; /* высота */
+  border-radius: 19px; /* радиус скругления */
+  background: #e2e1e1; /* цвет фона */
+  z-index: 5;
+  margin: 8px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  transition-duration: 300ms; /* анимация */
+
+  margin-left: 26px;
 }
 
+.switch-btn:after {
+  content: '';
+  height: 14px;
+  width: 14px;
+  z-index: 1;
+  background: #b6b1ab;
+  border-radius: 17px;
+  transition-duration: 0.3s;
+  position: absolute;
+  top: 2px;
+  left: 3px;
+}
+/* .switch-on {
+  background: #e2e1e1;
+} */
+.switch-on::after {
+  left: 11px;
+  background: #ef8303;
+}
